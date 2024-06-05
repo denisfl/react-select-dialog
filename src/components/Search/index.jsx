@@ -2,9 +2,14 @@ import PropTypes from 'prop-types'
 
 const Search = ({ label, onChange }) => {
   return (
-    <div>
-      <label>{label}</label>
-      <input type="search" onChange={onChange} />
+    <div role="search">
+      <label htmlFor="search-input">{label}</label>
+      <input
+        type="search"
+        id="search-input"
+        onChange={onChange}
+        aria-label={label}
+      />
     </div>
   )
 }

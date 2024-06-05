@@ -26,15 +26,6 @@ function App() {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen)
 
-  // const updateSelectedItems = (item) => {
-  //   setSelectedItems((prevSelectedItems) => {
-  //     if (prevSelectedItems.some((prevItem) => prevItem.id === item.id)) {
-  //       return prevSelectedItems.filter((prevItem) => prevItem.id !== item.id)
-  //     }
-  //     return [...prevSelectedItems, item]
-  //   })
-  // }
-
   const updateSelectedItems = (item) => {
     setSelectedItems((prevSelectedItems) => {
       let newSelectedItems
@@ -53,12 +44,18 @@ function App() {
     <>
       <h1>Select items</h1>
       {hint && <p className="hint">{hint}</p>}
-      <ItemsList items={selectedItems} />
+      <section aria-labelledby="selected-items">
+        <h2 id="selected-items">Selected Items</h2>
+        <ItemsList items={selectedItems} />
+      </section>
       <div>
-        <Button onClick={toggleModal}>Confirm my choise</Button>
+        <Button onClick={toggleModal} ariaLabel="Open item selection modal">
+          Confirm my choise
+        </Button>
       </div>
       <Modal
         isOpen={isModalOpen}
+        ariaLabelledby="modal-title"
         onClose={() => {
           setIsModalOpen(false)
         }}

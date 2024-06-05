@@ -2,10 +2,10 @@ import PropTypes from 'prop-types'
 import Item from '@/components/Item'
 import styles from './style.module.css'
 
-const ItemsList = ({ items = [] }) => {
+const ItemsList = ({ items = [], ariaLabel = 'Items list' }) => {
   if (items.length === 0) return null
   return (
-    <ul className={styles.itemsList}>
+    <ul className={styles.itemsList} role="list" aria-label={ariaLabel}>
       {items.map((item) => (
         <Item key={item.id} label={item.label} />
       ))}
@@ -15,6 +15,7 @@ const ItemsList = ({ items = [] }) => {
 
 ItemsList.propTypes = {
   items: PropTypes.array,
+  ariaLabel: PropTypes.string,
 }
 
 export default ItemsList

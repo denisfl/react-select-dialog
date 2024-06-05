@@ -1,0 +1,8 @@
+.itemsList {
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}

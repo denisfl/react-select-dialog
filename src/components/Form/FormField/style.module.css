@@ -1,0 +1,9 @@
+.formField {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.formFieldLabel {
+  font-weight: normal;
+}

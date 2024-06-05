@@ -4,7 +4,7 @@ import '@/App.css'
 import ItemsList from '@/components/ItemsList'
 import Button from '@/components/Button'
 import Modal from '@/components/Modal'
-import Checkbox from '@/components/Checkbox'
+import { Checkbox } from '@/components/Form'
 
 function App() {
   const [selectedItems, setSelectedItems] = useState([])

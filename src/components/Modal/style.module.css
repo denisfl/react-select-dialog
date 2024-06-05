@@ -25,3 +25,9 @@
   width: 32px;
   cursor: pointer;
 }
+
+.modalFilters {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+}

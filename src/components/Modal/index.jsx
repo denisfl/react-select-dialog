@@ -1,11 +1,22 @@
-import { useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import style from './style.module.css'
 import IconClose from '@/components/Icons/Close'
 import Button from '@/components/Button'
 import SrOnly from '@/components/SrOnly'
+import { FormField, Input, Select } from '@/components/Form'
 
 const Modal = ({ isOpen, onClose, children }) => {
+  const filterOptions = [
+    { value: '', label: 'No filters' },
+    { value: '10', label: '> 10' },
+    { value: '50', label: '> 50' },
+    { value: '200', label: '> 200' },
+  ]
+
+  const [searchQuery, setSearchQuery] = useState('')
+  const [selectedValue, setSelectedValue] = useState(filterOptions[0].value)
+
   const dialogRef = useRef()
 
   useEffect(() => {
@@ -49,6 +60,27 @@ const Modal = ({ isOpen, onClose, children }) => {
           <SrOnly text="Cancel and close dialog" />
         </button>
       </header>
+
+      <div className={style.modalFilters}>
+        <FormField id="modal-search" label="Search">
+          <Input
+            id="modal-search"
+            label="Search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+          />
+        </FormField>
+        <FormField id="modal-filter" label="Search">
+          <Select
+            id="modal-filter"
+            label="Filter"
+            value={selectedValue}
+            options={filterOptions}
+            onChange={(event) => setSelectedValue(event.target.value)}
+          />
+        </FormField>
+      </div>
+
       {children}
 
       <footer>

@@ -20,3 +20,7 @@ Visually, the following elements can be identified:
 - Search
 - Dropdown list with filters
 - Modal window
+
+### Jun 06, 2024
+
+The task for today involves improvements: it is necessary to move all the logic into a modal window. We need to add filtering through the search bar. At this stage, it is enough for us to use useState for storing local data. In future versions or with further complexity, we can add a separate store, for example, Mobx. But at this stage, we can do without it.

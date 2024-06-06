@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import styles from './style.module.css'
 import IconClose from '@/components/Icons/Close'
 
-const Item = ({ label, onClick }) => {
+const Item = ({ id, label, onClick }) => {
   return (
     <li className={styles.item}>
       <span className={styles.itemLabel}>{label}</span>
       <button
         className={styles.itemButton}
         type="button"
-        onClick={onClick}
+        onClick={() => onClick(id)}
         aria-label={`Remove ${label}`}
       >
         <IconClose />
@@ -19,6 +19,7 @@ const Item = ({ label, onClick }) => {
 }
 
 Item.propTypes = {
+  id: PropTypes.number.isRequired,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func,
 }

@@ -1,15 +1,25 @@
 import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
+import style from './style.module.css'
 
 const Checkbox = ({
   id,
   label,
-  isDisabled,
   ariaLabel,
-  isChecked,
+  isDisabled = false,
+  isChecked = false,
   onChange,
 }) => {
+  const [className, setClassName] = useState(
+    `${style.checkbox} ${isDisabled ? style.disabled : ''}`
+  )
+
+  useEffect(() => {
+    setClassName(`${style.checkbox} ${isDisabled ? style.disabled : ''}`)
+  }, [isDisabled])
+
   return (
-    <div>
+    <div className={className}>
       <input
         type="checkbox"
         id={id}
@@ -20,7 +30,9 @@ const Checkbox = ({
         aria-disabled={isDisabled}
         aria-checked={isChecked}
       />
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} className={style.label}>
+        {label}
+      </label>
     </div>
   )
 }

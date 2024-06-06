@@ -4,20 +4,11 @@ import '@/App.css'
 import ItemsList from '@/components/ItemsList'
 import Button from '@/components/Button'
 import Modal from '@/components/Modal'
-import { Checkbox } from '@/components/Form'
 
 function App() {
   const [selectedItems, setSelectedItems] = useState([])
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  // These data should be get from store
-  const items = [
-    { id: 0, label: 'Element 1' },
-    { id: 1, label: 'Element 2' },
-    { id: 2, label: 'Element 3' },
-    { id: 3, label: 'Element 4' },
-    { id: 4, label: 'Element 5' },
-  ]
   const hint = selectedItems.length
     ? `You currently have ${selectedItems.length} selected item${
         selectedItems.length > 1 ? 's' : ''
@@ -26,18 +17,8 @@ function App() {
 
   const toggleModal = () => setIsModalOpen(!isModalOpen)
 
-  const updateSelectedItems = (item) => {
-    setSelectedItems((prevSelectedItems) => {
-      let newSelectedItems
-      if (prevSelectedItems.some((prevItem) => prevItem.id === item.id)) {
-        newSelectedItems = prevSelectedItems.filter(
-          (prevItem) => prevItem.id !== item.id
-        )
-      } else {
-        newSelectedItems = [...prevSelectedItems, item]
-      }
-      return newSelectedItems.sort((a, b) => a.id - b.id)
-    })
+  const handleRemoveItem = (id) => {
+    setSelectedItems((prev) => prev.filter((item) => item.id !== id))
   }
 
   return (
@@ -46,31 +27,27 @@ function App() {
       {hint && <p className="hint">{hint}</p>}
       <section aria-labelledby="selected-items">
         <h2 id="selected-items">Selected Items</h2>
-        <ItemsList items={selectedItems} />
+        <ItemsList items={selectedItems} onClick={handleRemoveItem} />
       </section>
       <div>
         <Button onClick={toggleModal} ariaLabel="Open item selection modal">
           Confirm my choise
         </Button>
       </div>
-      <Modal
-        isOpen={isModalOpen}
-        ariaLabelledby="modal-title"
-        onClose={() => {
-          setIsModalOpen(false)
-        }}
-      >
-        {items.map((item) => (
-          <Checkbox
-            key={item.id}
-            label={item.label}
-            id={`element-${item.id}`}
-            onChange={() => updateSelectedItems(item)}
-          />
-        ))}
-
-        <ItemsList items={selectedItems} />
-      </Modal>
+      {isModalOpen && (
+        <Modal
+          isOpen={isModalOpen}
+          ariaLabelledby="modal-title"
+          selectedItems={selectedItems}
+          onClose={() => {
+            setIsModalOpen(false)
+          }}
+          onSave={(newSelectedItems) => {
+            setSelectedItems(newSelectedItems)
+            setIsModalOpen(false)
+          }}
+        />
+      )}
     </>
   )
 }

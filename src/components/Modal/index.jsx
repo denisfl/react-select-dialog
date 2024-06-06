@@ -4,9 +4,15 @@ import style from './style.module.css'
 import IconClose from '@/components/Icons/Close'
 import Button from '@/components/Button'
 import SrOnly from '@/components/SrOnly'
-import { FormField, Input, Select } from '@/components/Form'
+import ItemsList from '@/components/ItemsList'
+import { FormField, Input, Select, Checkbox } from '@/components/Form'
 
-const Modal = ({ isOpen, onClose, children }) => {
+const elements = Array.from({ length: 300 }, (_, i) => ({
+  id: i,
+  label: `Element ${i + 1}`,
+}))
+
+const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
   const filterOptions = [
     { value: '', label: 'No filters' },
     { value: '10', label: '> 10' },
@@ -16,7 +22,8 @@ const Modal = ({ isOpen, onClose, children }) => {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedValue, setSelectedValue] = useState(filterOptions[0].value)
-
+  const [filteredItems, setFilteredItems] = useState(elements)
+  const [currentSelection, setCurrentSelection] = useState(selectedItems)
   const dialogRef = useRef()
 
   useEffect(() => {
@@ -38,6 +45,40 @@ const Modal = ({ isOpen, onClose, children }) => {
       window.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen, onClose])
+
+  useEffect(() => {
+    let filtered = elements
+    if (searchQuery) {
+      filtered = filtered.filter((item) =>
+        item.label.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    }
+    if (selectedValue) {
+      filtered = filtered.filter((item) => item.id > selectedValue)
+    }
+    setFilteredItems(filtered)
+  }, [searchQuery, selectedValue])
+
+  const handleCheckboxChange = (item) => {
+    if (currentSelection.some((selectedItem) => selectedItem.id === item.id)) {
+      setCurrentSelection((prev) => prev.filter((i) => i.id !== item.id))
+    } else if (currentSelection.length < 3) {
+      setCurrentSelection((prev) => {
+        const newSelection = [...prev, item]
+        newSelection.sort((a, b) => a.id - b.id)
+        return newSelection
+      })
+    }
+  }
+
+  const handleRemoveItem = (id) => {
+    setCurrentSelection((prev) => prev.filter((item) => item.id !== id))
+  }
+
+  const handleSave = () => {
+    onSave(currentSelection)
+    onClose()
+  }
 
   return (
     <dialog
@@ -70,7 +111,7 @@ const Modal = ({ isOpen, onClose, children }) => {
             onChange={(event) => setSearchQuery(event.target.value)}
           />
         </FormField>
-        <FormField id="modal-filter" label="Search">
+        <FormField id="modal-filter" label="Filter">
           <Select
             id="modal-filter"
             label="Filter"
@@ -81,10 +122,31 @@ const Modal = ({ isOpen, onClose, children }) => {
         </FormField>
       </div>
 
-      {children}
+      <div className={style.modalCheckboxesContainer}>
+        {filteredItems.map((item) => (
+          <Checkbox
+            key={item.id}
+            label={item.label}
+            id={`element-${item.id}`}
+            isChecked={currentSelection.some(
+              (selectedItem) => selectedItem.id === item.id
+            )}
+            isDisabled={
+              !currentSelection.some(
+                (selectedItem) => selectedItem.id === item.id
+              ) && currentSelection.length >= 3
+            }
+            onChange={() => handleCheckboxChange(item)}
+          />
+        ))}
+      </div>
+
+      <ItemsList items={currentSelection} onClick={handleRemoveItem} />
 
       <footer>
-        <Button ariaLabel="Save changes and close dialog">Save</Button>
+        <Button onClick={handleSave} ariaLabel="Save changes and close dialog">
+          Save
+        </Button>
         <Button ariaLabel="Cancel and close dialog" isDanger onClick={onClose}>
           Cancel
         </Button>
@@ -94,7 +156,9 @@ const Modal = ({ isOpen, onClose, children }) => {
 }
 
 Modal.propTypes = {
+  selectedItems: PropTypes.array,
   isOpen: PropTypes.bool.isRequired,
+  onSave: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
   children: PropTypes.node,
 }

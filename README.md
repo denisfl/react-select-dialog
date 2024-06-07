@@ -24,3 +24,7 @@ Visually, the following elements can be identified:
 ### Jun 06, 2024
 
 The task for today involves improvements: it is necessary to move all the logic into a modal window. We need to add filtering through the search bar. At this stage, it is enough for us to use useState for storing local data. In future versions or with further complexity, we can add a separate store, for example, Mobx. But at this stage, we can do without it.
+
+### Jun 07, 2024
+
+I hope you love tests as much as I do :) I love testing, it helps to find bottlenecks. That's why I added Playwright for testing. Honestly, this was my first experience using Playwright. I've used Cypress a lot in the past. But today I decided to try something new. I liked the result. Playwright seems a bit more convenient, faster, and more informative.

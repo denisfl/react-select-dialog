@@ -1,8 +1,14 @@
 import PropTypes from 'prop-types'
 
-const Select = ({ id, label, options, value, onChange }) => {
+const Select = ({ id, label, options, value, onChange, dataTest = '' }) => {
   return (
-    <select id={id} value={value} onChange={onChange} aria-label={label}>
+    <select
+      id={id}
+      value={value}
+      onChange={onChange}
+      aria-label={label}
+      data-test={dataTest}
+    >
       {options.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
@@ -17,6 +23,7 @@ Select.propTypes = {
   label: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   value: PropTypes.string.isRequired,
+  dataTest: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
 

@@ -87,15 +87,21 @@ const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
+      data-test="modal"
     >
       <header className={style.modalHeader}>
-        <h2 id="modal-title" className={style.modalTitle}>
+        <h2
+          id="modal-title"
+          className={style.modalTitle}
+          data-test="modal-title"
+        >
           Select items
         </h2>
         <button
           className={style.modalCloseButton}
           onClick={onClose}
           aria-label="Cancel and close dialog"
+          data-test="modal-close-button"
         >
           <IconClose />
           <SrOnly text="Cancel and close dialog" />
@@ -109,6 +115,7 @@ const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
             label="Search"
             value={searchQuery}
             onChange={(event) => setSearchQuery(event.target.value)}
+            dataTest="modal-search"
           />
         </FormField>
         <FormField id="modal-filter" label="Filter">
@@ -118,11 +125,12 @@ const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
             value={selectedValue}
             options={filterOptions}
             onChange={(event) => setSelectedValue(event.target.value)}
+            dataTest="modal-filter"
           />
         </FormField>
       </div>
 
-      <div className={style.modalCheckboxesContainer}>
+      <div className={style.modalCheckboxesContainer} data-test="filtered-list">
         {filteredItems.map((item) => (
           <Checkbox
             key={item.id}
@@ -137,17 +145,31 @@ const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
               ) && currentSelection.length >= 3
             }
             onChange={() => handleCheckboxChange(item)}
+            dataTest="filtered-item"
           />
         ))}
       </div>
 
-      <ItemsList items={currentSelection} onClick={handleRemoveItem} />
+      <ItemsList
+        items={currentSelection}
+        onClick={handleRemoveItem}
+        dataTest="modal-selected-items"
+      />
 
       <footer>
-        <Button onClick={handleSave} ariaLabel="Save changes and close dialog">
+        <Button
+          onClick={handleSave}
+          ariaLabel="Save changes and close dialog"
+          dataTest="button-save"
+        >
           Save
         </Button>
-        <Button ariaLabel="Cancel and close dialog" isDanger onClick={onClose}>
+        <Button
+          ariaLabel="Cancel and close dialog"
+          isDanger
+          onClick={onClose}
+          dataTest="button-cancel"
+        >
           Cancel
         </Button>
       </footer>

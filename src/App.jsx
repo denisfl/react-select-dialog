@@ -23,14 +23,26 @@ function App() {
 
   return (
     <>
-      <h1>Select items</h1>
-      {hint && <p className="hint">{hint}</p>}
+      <h1 data-test="header">Select items</h1>
+      {hint && (
+        <p className="hint" data-test="hint">
+          {hint}
+        </p>
+      )}
       <section aria-labelledby="selected-items">
         <h2 id="selected-items">Selected Items</h2>
-        <ItemsList items={selectedItems} onClick={handleRemoveItem} />
+        <ItemsList
+          items={selectedItems}
+          onClick={handleRemoveItem}
+          dataTest="selected-list"
+        />
       </section>
       <div>
-        <Button onClick={toggleModal} ariaLabel="Open item selection modal">
+        <Button
+          onClick={toggleModal}
+          ariaLabel="Open item selection modal"
+          dataTest="confirm-button"
+        >
           Confirm my choise
         </Button>
       </div>

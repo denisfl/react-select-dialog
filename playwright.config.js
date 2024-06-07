@@ -14,6 +14,7 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     video: 'on',
     screenshot: 'on',
+    baseURL: 'http://localhost:5173',
   },
   projects: [
     {

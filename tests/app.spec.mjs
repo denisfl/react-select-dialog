@@ -33,7 +33,7 @@ test.describe('App Component', () => {
   }
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:5173')
+    await page.goto('/')
   })
 
   test('should display the title, confirm button', async ({ page }) => {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import '@/App.css'
 import ItemsList from '@/components/ItemsList'
@@ -6,7 +6,11 @@ import Button from '@/components/Button'
 import Modal from '@/components/Modal'
 
 function App() {
-  const [selectedItems, setSelectedItems] = useState([])
+  const [selectedItems, setSelectedItems] = useState(() => {
+    const savedItems = localStorage.getItem('selectedItems')
+    return savedItems ? JSON.parse(savedItems) : []
+  })
+
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const hint = selectedItems.length
@@ -21,16 +25,19 @@ function App() {
     setSelectedItems((prev) => prev.filter((item) => item.id !== id))
   }
 
+  useEffect(() => {
+    localStorage.setItem('selectedItems', JSON.stringify(selectedItems))
+  }, [selectedItems])
+
   return (
     <>
       <h1 data-test="header">Select items</h1>
-      {hint && (
-        <p className="hint" data-test="hint">
-          {hint}
-        </p>
-      )}
-      <section aria-labelledby="selected-items">
-        <h2 id="selected-items">Selected Items</h2>
+      <section className="selected-items-container">
+        {hint && (
+          <p className="hint" data-test="hint">
+            {hint}
+          </p>
+        )}
         <ItemsList
           items={selectedItems}
           onClick={handleRemoveItem}
@@ -41,9 +48,9 @@ function App() {
         <Button
           onClick={toggleModal}
           ariaLabel="Open item selection modal"
-          dataTest="confirm-button"
+          dataTest="open-modal-button"
         >
-          Confirm my choise
+          Change my choise
         </Button>
       </div>
       {isModalOpen && (

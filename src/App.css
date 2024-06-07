@@ -3,3 +3,8 @@
   margin: 0 auto;
   padding: 2rem;
 }
+
+.selected-items-container {
+  min-height: 4.68rem;
+  margin-bottom: 1rem;
+}

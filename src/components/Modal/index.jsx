@@ -150,11 +150,13 @@ const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
         ))}
       </div>
 
-      <ItemsList
-        items={currentSelection}
-        onClick={handleRemoveItem}
-        dataTest="modal-selected-items"
-      />
+      <div className={style.modalSelectedListContainer}>
+        <ItemsList
+          items={currentSelection}
+          onClick={handleRemoveItem}
+          dataTest="modal-selected-items"
+        />
+      </div>
 
       <footer>
         <Button

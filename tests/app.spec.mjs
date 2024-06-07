@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test'
 
 test.describe('App Component', () => {
   const headerLocator = '[data-test="header"]'
-  const confirmButtonLocator = '[data-test="confirm-button"]'
+  const openModalButtonLocator = '[data-test="open-modal-button"]'
   const hintLocator = '[data-test="hint"]'
   const modalLocator = '[data-test="modal"]'
   const modalCloseButtonLocator = '[data-test="modal-close-button"]'
@@ -38,35 +38,35 @@ test.describe('App Component', () => {
 
   test('should display the title, confirm button', async ({ page }) => {
     await checkText(page, headerLocator, 'Select items')
-    await checkVisibility(page, confirmButtonLocator, true)
-    await checkText(page, confirmButtonLocator, 'Confirm my choise')
+    await checkVisibility(page, openModalButtonLocator, true)
+    await checkText(page, openModalButtonLocator, 'Change my choise')
     await checkVisibility(page, hintLocator, false)
     await checkVisibility(page, modalLocator, false)
   })
 
-  test('should display modal by click on "Confirm my choise" button', async ({
+  test('should display modal by click on "Change my choise" button', async ({
     page,
   }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
   })
 
   test('should close the modal by click on close button', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await page.click(modalCloseButtonLocator)
     await checkVisibility(page, modalLocator, false)
   })
 
   test('should close button by pressing "Esc" key', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await page.keyboard.press('Escape')
     await checkVisibility(page, modalLocator, false)
   })
 
   test('should search items by search query', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
 
     await checkCount(page, filteredItemLocator, 300)
@@ -81,7 +81,7 @@ test.describe('App Component', () => {
   })
 
   test('should filter items by filter option', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
 
     await checkCount(page, filteredItemLocator, 300)
@@ -104,7 +104,7 @@ test.describe('App Component', () => {
   test('should filter items by search query and filter option', async ({
     page,
   }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
 
     await checkCount(page, filteredItemLocator, 300)
@@ -118,7 +118,7 @@ test.describe('App Component', () => {
   })
 
   test('should select items by click on checkbox', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await checkVisibility(page, modalSelectedListLocator, false)
 
@@ -129,7 +129,7 @@ test.describe('App Component', () => {
   })
 
   test('should not select more than three items', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await checkVisibility(page, modalSelectedListLocator, false)
 
@@ -144,7 +144,7 @@ test.describe('App Component', () => {
   })
 
   test('should be not saved by click on Cancel button', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await checkVisibility(page, modalSelectedListLocator, false)
 
@@ -158,7 +158,7 @@ test.describe('App Component', () => {
   })
 
   test('should be saved by click on Save button', async ({ page }) => {
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await checkVisibility(page, modalSelectedListLocator, false)
 
@@ -171,7 +171,7 @@ test.describe('App Component', () => {
     await checkCount(page, `${selectedItemsLocator} li`, 1)
     await checkText(page, hintLocator, 'You currently have 1 selected item.')
 
-    await page.click(confirmButtonLocator)
+    await page.click(openModalButtonLocator)
     await checkVisibility(page, modalLocator, true)
     await page.click(`${filteredItemLocator}:nth-child(2)`)
     await checkCount(page, `${modalSelectedListLocator} li`, 2)

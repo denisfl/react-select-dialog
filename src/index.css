@@ -60,3 +60,8 @@ button:focus-visible {
   height: auto;
   fill: currentColor;
 }
+
+input:not([type='checkbox']),
+select {
+  width: 100%;
+}

@@ -9,6 +9,7 @@ const Checkbox = ({
   isDisabled = false,
   isChecked = false,
   onChange,
+  dataTest = '',
 }) => {
   const [className, setClassName] = useState(
     `${style.checkbox} ${isDisabled ? style.disabled : ''}`
@@ -19,7 +20,7 @@ const Checkbox = ({
   }, [isDisabled])
 
   return (
-    <div className={className}>
+    <div className={className} data-test={dataTest}>
       <input
         type="checkbox"
         id={id}
@@ -43,6 +44,7 @@ Checkbox.propTypes = {
   ariaLabel: PropTypes.string,
   isDisabled: PropTypes.bool,
   isChecked: PropTypes.bool,
+  dataTest: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 }
 

@@ -7,6 +7,7 @@ const Button = ({
   onClick,
   children,
   ariaLabel,
+  dataTest = '',
 }) => {
   const buttonClass = `${styles.button} ${
     isDanger ? styles.danger : styles.success
@@ -20,6 +21,7 @@ const Button = ({
       onClick={onClick}
       aria-label={ariaLabel}
       aria-disabled={disabled}
+      data-test={dataTest}
     >
       {children}
     </button>
@@ -32,6 +34,7 @@ Button.propTypes = {
   children: PropTypes.node,
   onClick: PropTypes.func,
   ariaLabel: PropTypes.string,
+  dataTest: PropTypes.string,
 }
 
 export default Button

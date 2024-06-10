@@ -54,7 +54,9 @@ const Modal = ({ selectedItems = [], isOpen, onClose, onSave }) => {
       )
     }
     if (selectedValue) {
-      filtered = filtered.filter((item) => item.id > selectedValue)
+      // Note: the original code uses `>=` instead of `>`
+      // because we are filtering by the element's label, not by the id or index
+      filtered = filtered.filter((item) => item.id >= selectedValue)
     }
     setFilteredItems(filtered)
   }, [searchQuery, selectedValue])

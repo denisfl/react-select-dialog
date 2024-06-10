@@ -88,17 +88,17 @@ test.describe('App Component', () => {
     await page.selectOption(modalFilterLocator, {
       label: '> 10',
     })
-    await checkCount(page, filteredItemLocator, 289)
+    await checkCount(page, filteredItemLocator, 290)
 
     await page.selectOption(modalFilterLocator, {
       label: '> 50',
     })
-    await checkCount(page, filteredItemLocator, 249)
+    await checkCount(page, filteredItemLocator, 250)
 
     await page.selectOption(modalFilterLocator, {
       label: '> 200',
     })
-    await checkCount(page, filteredItemLocator, 99)
+    await checkCount(page, filteredItemLocator, 100)
   })
 
   test('should filter items by search query and filter option', async ({

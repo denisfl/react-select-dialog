@@ -31,4 +31,4 @@ I hope you love tests as much as I do :) I love testing, it helps to find bottle
 
 ### Jun 08, 2024
 
-I checked the conde one more time and add small fixes. Now the result is available by the link https://react-select-dialog.vercel.app/
+I checked the code one more time and added small fixes. Now the result is available by the link https://react-select-dialog.vercel.app/

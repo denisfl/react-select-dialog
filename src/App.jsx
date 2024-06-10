@@ -50,7 +50,7 @@ function App() {
           ariaLabel="Open item selection modal"
           dataTest="open-modal-button"
         >
-          Change my choise
+          Change my choice
         </Button>
       </div>
       {isModalOpen && (

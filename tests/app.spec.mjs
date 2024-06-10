@@ -39,12 +39,12 @@ test.describe('App Component', () => {
   test('should display the title, confirm button', async ({ page }) => {
     await checkText(page, headerLocator, 'Select items')
     await checkVisibility(page, openModalButtonLocator, true)
-    await checkText(page, openModalButtonLocator, 'Change my choise')
+    await checkText(page, openModalButtonLocator, 'Change my choice')
     await checkVisibility(page, hintLocator, false)
     await checkVisibility(page, modalLocator, false)
   })
 
-  test('should display modal by click on "Change my choise" button', async ({
+  test('should display modal by click on "Change my choice" button', async ({
     page,
   }) => {
     await page.click(openModalButtonLocator)

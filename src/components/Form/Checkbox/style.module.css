@@ -4,7 +4,7 @@
 }
 
 .checkbox:hover {
-  background-color: #f2f2f2;
+  background-color: rgba(var(--shadowed-color), 0.5);
 }
 
 .disabled {
@@ -15,4 +15,11 @@
 .label {
   display: block;
   flex: 1;
+  padding-left: 0.4rem;
+}
+
+[type='checkbox'] {
+  border: 1px solid rgba(var(--shadowed-color), 1);
+  border-radius: 0.4rem;
+  background: transparent;
 }

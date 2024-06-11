@@ -5,8 +5,9 @@
 }
 
 :root {
+  --shadowed-color: 74, 102, 133;
   flex: 1;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -64,4 +65,8 @@ button:focus-visible {
 input:not([type='checkbox']),
 select {
   width: 100%;
+  height: 32px;
+  border: 1px solid rgba(var(--shadowed-color), 0.25);
+  border-radius: 0.4rem;
+  background: transparent;
 }

@@ -1,8 +1,9 @@
 .item {
   display: inline-flex;
-  background-color: #213547;
+  background-color: #43586b;
   color: #f9f9f9;
   align-items: center;
+  border-radius: 0.25rem;
 }
 .itemLabel {
   position: relative;

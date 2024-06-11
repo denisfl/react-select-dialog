@@ -36,7 +36,8 @@
 .modalCheckboxesContainer {
   height: 200px;
   overflow-x: auto;
-  border: 1px solid #00000026;
+  border: 1px solid rgba(var(--shadowed-color), 0.25);
+  border-radius: 0.4rem;
 }
 
 .modalSelectedListContainer {
